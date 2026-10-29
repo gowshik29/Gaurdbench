@@ -1,0 +1,15 @@
+entity,period,metric_label,value,currency,scale
+Synthetic Example Holdings (fictional),FY2024,cash and cash equivalents,100000,USD,units
+Synthetic Example Holdings (fictional),FY2024,current assets,300000,USD,units
+Synthetic Example Holdings (fictional),FY2024,total assets,1200000,USD,units
+Synthetic Example Holdings (fictional),FY2024,current liabilities,200000,USD,units
+Synthetic Example Holdings (fictional),FY2024,total liabilities,500000,USD,units
+Synthetic Example Holdings (fictional),FY2024,total equity,700000,USD,units
+Synthetic Example Holdings (fictional),FY2024,total debt,200000,USD,units
+Synthetic Example Holdings (fictional),FY2025,cash and cash equivalents,140000,USD,units
+Synthetic Example Holdings (fictional),FY2025,current assets,390000,USD,units
+Synthetic Example Holdings (fictional),FY2025,total assets,1400000,USD,units
+Synthetic Example Holdings (fictional),FY2025,current liabilities,250000,USD,units
+Synthetic Example Holdings (fictional),FY2025,total liabilities,550000,USD,units
+Synthetic Example Holdings (fictional),FY2025,total equity,850000,USD,units
+Synthetic Example Holdings (fictional),FY2025,total debt,180000,USD,units

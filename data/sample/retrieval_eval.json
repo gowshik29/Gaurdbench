@@ -1,0 +1,17 @@
+{
+  "description": "Synthetic labeled retrieval cases for the FinSight local TF-IDF baseline.",
+  "cases": [
+    {
+      "query": "Example Corp FY2025 revenue",
+      "relevant_passage_ids": ["eval_revenue_2025"]
+    },
+    {
+      "query": "FY2025 operating cash flow",
+      "relevant_passage_ids": ["eval_cash_flow_2025"]
+    },
+    {
+      "query": "Example Corp FY2025 operating income",
+      "relevant_passage_ids": ["eval_operating_income_2025"]
+    }
+  ]
+}

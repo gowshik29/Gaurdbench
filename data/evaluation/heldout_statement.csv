@@ -1,0 +1,19 @@
+Entity,Period,Metric Label,Value,Currency,Unit,Scale
+Fictional Northstar Components,FY2024,net sales,2500,USD,currency,thousands
+Fictional Northstar Components,FY2024,cost of revenue,1500,USD,currency,thousands
+Fictional Northstar Components,FY2024,operating income,300,USD,currency,thousands
+Fictional Northstar Components,FY2024,net income,180,USD,currency,thousands
+Fictional Northstar Components,FY2024,operating cash flow,220,USD,currency,thousands
+Fictional Northstar Components,FY2024,current assets,800,USD,currency,thousands
+Fictional Northstar Components,FY2024,current liabilities,500,USD,currency,thousands
+Fictional Northstar Components,FY2024,total debt,400,USD,currency,thousands
+Fictional Northstar Components,FY2024,total equity,600,USD,currency,thousands
+Fictional Northstar Components,FY2025,net sales,2800,USD,currency,thousands
+Fictional Northstar Components,FY2025,cost of revenue,1680,USD,currency,thousands
+Fictional Northstar Components,FY2025,operating income,350,USD,currency,thousands
+Fictional Northstar Components,FY2025,net income,210,USD,currency,thousands
+Fictional Northstar Components,FY2025,operating cash flow,260,USD,currency,thousands
+Fictional Northstar Components,FY2025,current assets,930,USD,currency,thousands
+Fictional Northstar Components,FY2025,current liabilities,550,USD,currency,thousands
+Fictional Northstar Components,FY2025,total debt,420,USD,currency,thousands
+Fictional Northstar Components,FY2025,total equity,700,USD,currency,thousands

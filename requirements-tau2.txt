@@ -1,0 +1,2 @@
+-r requirements.txt
+tau2 @ git+https://github.com/sierra-research/tau2-bench.git@05736c27219b769d0be507574dd3135010916644

@@ -1,0 +1,7 @@
+{
+  "ollama_base_url": "http://localhost:11434",
+  "ollama_model": "qwen2.5:3b",
+  "audit_db": "logs/audit.db",
+  "langsmith_tracing": true,
+  "langsmith_project": "guardbench-local"
+}

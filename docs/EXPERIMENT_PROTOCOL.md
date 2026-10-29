@@ -1,0 +1,113 @@
+# GuardBench experiment protocol
+
+## Scope and evidence levels
+
+Use three independent evidence sources:
+
+1. **Deterministic authorization ground truth** from the fixture and trusted
+   gate events. This is the security oracle for synthetic dispatch tests.
+2. **Human-reviewed task quality** from `human_labels.csv`.
+3. **Model-judge predictions** from the local Ollama judge.
+
+Do not merge these labels, let the judge authorize a tool, or treat prompt-based
+refusal as proof that the gate enforced authorization.
+
+## Predeclared synthetic ablation
+
+`evaluation.run_experiments` records this hypothesis and metric list in run
+metadata before evaluating scenarios:
+
+> Exact approval should prevent unauthorized execution. The risk-threshold
+> ablation should reduce confirmations but may permit MEDIUM-risk actions
+> without approval.
+
+The compared modes are:
+
+- **baseline**: the trusted dispatch boundary still validates the allow-list,
+  schema, and audit path, but the research baseline policy requires no
+  confirmation.
+- **gated**: existing confirmation behavior, now represented by the versioned
+  default action policy.
+- **risk_aware**: confirmation required only for HIGH and CRITICAL action rules;
+  MEDIUM actions are intentionally not approval-gated in this counterfactual.
+
+Schema validation and dispatch boundary are held constant across modes; they
+are not disabled in this ablation. Thus the experiment isolates approval
+threshold behavior, not the independent causal contribution of schema
+validation, audit integrity, or model refusal. The risk-aware arm is an
+intentional policy trade-off, not a recommended production policy.
+
+Predeclared metrics are unauthorized executions, false allows, false blocks,
+task-success fixture outcomes, policy compliance, confirmation count, and
+mean/p50/p95 latency. Their denominators are specified in
+[METRICS.md](./METRICS.md).
+
+Run the deterministic ablation:
+
+```powershell
+.\.venv\Scripts\python.exe -m evaluation.run_experiments --benchmark synthetic --episodes 32 --seed 17 --output data\ablations
+```
+
+This does not call Ollama or tau2-bench. It writes run metadata, episodes,
+audit databases, CSV/JSON/Markdown summaries, and a run-specific
+preregistration file (hypothesis, metrics, modes, policy mappings) before the
+first episode, plus a run-specific reproducibility report. Preserve each run
+directory and report the exact seed,
+sample size, source revision (or explicitly unavailable), and policy version.
+
+## Human-label and calibration workflow
+
+Generate evaluation labels without overwriting an existing file:
+
+```powershell
+.\.venv\Scripts\python.exe -m evaluation.make_label_template --input data\episodes --output data\human_labels.csv --split evaluation
+```
+
+Create a distinct calibration template using episodes reserved for calibration:
+
+```powershell
+.\.venv\Scripts\python.exe -m evaluation.make_label_template --input data\calibration_episodes --output data\calibration_labels.csv --split calibration
+```
+
+Fill `human_task_quality` with `PASS`, `FAIL`, or `UNCERTAIN`; keep the
+read-only authorization ground truth column unchanged. Legacy binary label
+columns are accepted for compatibility but are not authorization evidence.
+Run judge evaluation only when the local Ollama model is available:
+
+```powershell
+.\.venv\Scripts\python.exe -m evaluation.score_judge --input data\episodes --labels data\human_labels.csv --calibration-input data\calibration_episodes --calibration-labels data\calibration_labels.csv
+```
+
+The script reports agreement only from explicit labels and uses separate
+calibration labels for reliability analysis. Below 30 calibration examples or
+when only one outcome class is represented, calibration is inconclusive.
+Human labels must remain held out from judge prompting and policy decisions.
+
+## τ²-bench experiments
+
+Run τ²-bench separately from synthetic fixtures after installing the pinned
+dependency/data and confirming local Ollama availability:
+
+```powershell
+.\.venv\Scripts\python.exe -m evaluation.run_experiments --benchmark tau2 --split base --limit 2 --seed 17 --model qwen2.5:3b --output data\tau2_runs
+```
+
+Record the pinned tau2 commit, package version, task IDs, model tag, seed,
+approval fixture, evaluator reward, gate audit, and exact command. A missing
+benchmark data directory or unavailable model is a failed/unrun benchmark, not
+a zero-score run. The current adapter has baseline and gated modes; it does
+not yet provide the same three-way risk-policy ablation as the synthetic
+runner.
+
+## Reporting limitations
+
+- The synthetic corpus contains eight hand-authored scenarios, repeated to
+  reach the requested sample size. Those repetitions are not independent.
+- The synthetic ablation uses fixed arguments/labels and does not measure LLM
+  task quality or prompt robustness.
+- Local-model quality requires separate human review; no human labels or
+  judge outputs are generated by the deterministic runner.
+- A hash chain detects local record alteration/reordering/deletion, but is not
+  protected by an external checkpoint.
+- A passing CI run demonstrates reproducible tests on that runner, not
+  production readiness or a zero-risk claim.

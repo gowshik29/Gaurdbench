@@ -1,0 +1,74 @@
+{
+  "dataset_id": "synthetic-heldout-financial-v1",
+  "description": "Fictional held-out financial statement, separate from data/sample fixtures.",
+  "document": "heldout_statement.csv",
+  "retrieval_k": 3,
+  "expected_metrics": [
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "net sales", "canonical_metric_id": "revenue", "value": "2500", "source_location": {"row": 2, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "cost of revenue", "canonical_metric_id": "cost_of_revenue", "value": "1500", "source_location": {"row": 3, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "operating income", "canonical_metric_id": "operating_income", "value": "300", "source_location": {"row": 4, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "net income", "canonical_metric_id": "net_income", "value": "180", "source_location": {"row": 5, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "operating cash flow", "canonical_metric_id": "operating_cash_flow", "value": "220", "source_location": {"row": 6, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "current assets", "canonical_metric_id": "current_assets", "value": "800", "source_location": {"row": 7, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "current liabilities", "canonical_metric_id": "current_liabilities", "value": "500", "source_location": {"row": 8, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "total debt", "canonical_metric_id": "total_debt", "value": "400", "source_location": {"row": 9, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2024", "label": "total equity", "canonical_metric_id": "total_equity", "value": "600", "source_location": {"row": 10, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "net sales", "canonical_metric_id": "revenue", "value": "2800", "source_location": {"row": 11, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "cost of revenue", "canonical_metric_id": "cost_of_revenue", "value": "1680", "source_location": {"row": 12, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "operating income", "canonical_metric_id": "operating_income", "value": "350", "source_location": {"row": 13, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "net income", "canonical_metric_id": "net_income", "value": "210", "source_location": {"row": 14, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "operating cash flow", "canonical_metric_id": "operating_cash_flow", "value": "260", "source_location": {"row": 15, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "current assets", "canonical_metric_id": "current_assets", "value": "930", "source_location": {"row": 16, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "current liabilities", "canonical_metric_id": "current_liabilities", "value": "550", "source_location": {"row": 17, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "total debt", "canonical_metric_id": "total_debt", "value": "420", "source_location": {"row": 18, "table": "CSV"}},
+    {"entity": "Fictional Northstar Components", "period": "FY2025", "label": "total equity", "canonical_metric_id": "total_equity", "value": "700", "source_location": {"row": 19, "table": "CSV"}}
+  ],
+  "expected_period_comparisons": [
+    {"entity": "Fictional Northstar Components", "canonical_metric_id": "revenue", "current_period": "FY2025", "previous_period": "FY2024", "kind": "absolute_change", "value": "300"},
+    {"entity": "Fictional Northstar Components", "canonical_metric_id": "revenue", "current_period": "FY2025", "previous_period": "FY2024", "kind": "growth", "value": "12"},
+    {"entity": "Fictional Northstar Components", "canonical_metric_id": "operating_cash_flow", "current_period": "FY2025", "previous_period": "FY2024", "kind": "absolute_change", "value": "40"}
+  ],
+  "retrieval_cases": [
+    {"query": "Fictional Northstar FY2025 net sales", "relevant_source_locations": [{"row": 11, "table": "CSV"}]},
+    {"query": "Fictional Northstar FY2025 operating cash flow", "relevant_source_locations": [{"row": 15, "table": "CSV"}]}
+  ],
+  "reconciliation_cases": [
+    {
+      "left": {"metric_id": "exact_left", "entity": "Example Corp", "canonical_metric_id": "revenue", "period": "FY2025", "currency": "USD", "unit": "currency", "scale": "millions", "value": "100"},
+      "right": {"metric_id": "exact_right", "entity": "Example Corp", "canonical_metric_id": "revenue", "period": "FY2025", "currency": "USD", "unit": "currency", "scale": "millions", "value": "100"},
+      "expected_status": "exact_match"
+    },
+    {
+      "left": {"metric_id": "currency_left", "entity": "Example Corp", "canonical_metric_id": "revenue", "period": "FY2025", "currency": "USD", "unit": "currency", "scale": "millions", "value": "100"},
+      "right": {"metric_id": "currency_right", "entity": "Example Corp", "canonical_metric_id": "revenue", "period": "FY2025", "currency": "EUR", "unit": "currency", "scale": "millions", "value": "100"},
+      "expected_status": "not_comparable"
+    },
+    {
+      "left": {"metric_id": "scale_left", "entity": "Example Corp", "canonical_metric_id": "revenue", "period": "FY2025", "currency": "USD", "unit": "currency", "scale": "millions", "value": "1.2"},
+      "right": {"metric_id": "scale_right", "entity": "Example Corp", "canonical_metric_id": "revenue", "period": "FY2025", "currency": "USD", "unit": "currency", "scale": "thousands", "value": "1200"},
+      "conversion": {
+        "source_currency": "USD",
+        "source_unit": "currency",
+        "source_scale": "thousands",
+        "target_currency": "USD",
+        "target_unit": "currency",
+        "target_scale": "millions",
+        "factor": "0.001",
+        "evidence": "Synthetic evaluation fixture: 1 million equals 1000 thousand."
+      },
+      "expected_status": "exact_match"
+    }
+  ],
+  "research_cases": [
+    {
+      "query": "Fictional Northstar FY2025 net sales",
+      "expected_supported": true,
+      "relevant_source_locations": [{"row": 11, "table": "CSV"}]
+    },
+    {
+      "query": "quasar population",
+      "expected_supported": false,
+      "relevant_source_locations": []
+    }
+  ]
+}

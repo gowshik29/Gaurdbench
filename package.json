@@ -1,0 +1,11 @@
+{
+  "name": "guardbench-promptfoo-evals",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "eval:promptfoo": "promptfoo eval -c promptfooconfig.yaml"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.124.1"
+  }
+}

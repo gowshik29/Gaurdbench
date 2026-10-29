@@ -1,0 +1,11 @@
+entity,period,metric_label,value,currency,scale
+Synthetic Example Holdings (fictional),FY2024,revenue,1000000,USD,units
+Synthetic Example Holdings (fictional),FY2024,cost of revenue,400000,USD,units
+Synthetic Example Holdings (fictional),FY2024,operating expenses,400000,USD,units
+Synthetic Example Holdings (fictional),FY2024,operating income,200000,USD,units
+Synthetic Example Holdings (fictional),FY2024,net income,150000,USD,units
+Synthetic Example Holdings (fictional),FY2025,revenue,1200000,USD,units
+Synthetic Example Holdings (fictional),FY2025,cost of revenue,480000,USD,units
+Synthetic Example Holdings (fictional),FY2025,operating expenses,450000,USD,units
+Synthetic Example Holdings (fictional),FY2025,operating income,270000,USD,units
+Synthetic Example Holdings (fictional),FY2025,net income,205000,USD,units

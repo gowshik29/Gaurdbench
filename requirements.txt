@@ -1,0 +1,4 @@
+langsmith>=0.14.9,<1
+requests>=2.32.0,<3
+streamlit>=1.37.0,<2
+pytest>=8.0.0,<9
